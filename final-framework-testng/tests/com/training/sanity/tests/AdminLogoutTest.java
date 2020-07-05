@@ -11,6 +11,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.AssertJUnit;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -32,29 +34,26 @@ import com.training.utility.Randomstring;
 
 public class AdminLogoutTest {
 
-	private WebDriver driver;
-	private String baseUrl;
-	private LoginPOM loginPOM;
-	private UpdateProfilePOM updateprflPOM;
-	private GeneratePasswordPOM generatepwdPOM;
-	private AdminLogoutPOM adminlogoutPOM;
-	private static Properties properties;
-	private ScreenShot screenShot;
-
-	@BeforeClass
-	public static void setUpBeforeClass() throws IOException {
+	public WebDriver driver;
+	public String baseUrl;
+	public LoginPOM loginPOM;
+	public UpdateProfilePOM updateprflPOM;
+	public GeneratePasswordPOM generatepwdPOM;
+	public AdminLogoutPOM adminlogoutPOM;
+	public static Properties properties;
+	public ScreenShot screenShot;
+	
+	
+	
+	@BeforeMethod
+	public  void setUpBeforeClass() throws IOException {
 		properties = new Properties();
 		FileInputStream inStream = new FileInputStream("./resources/others.properties");
 		properties.load(inStream);
-	}
-
-	@BeforeMethod
-	public void setUp() throws Exception {
 		driver = DriverFactory.getDriver(DriverNames.CHROME);
 		loginPOM = new LoginPOM(driver); 
-		updateprflPOM = new UpdateProfilePOM(driver);
-		generatepwdPOM = new GeneratePasswordPOM(driver);
-		adminlogoutPOM = new AdminLogoutPOM(driver);
+		adminlogoutPOM=new AdminLogoutPOM(driver);
+		updateprflPOM=new UpdateProfilePOM(driver);
 		baseUrl = properties.getProperty("baseURL");
 		screenShot = new ScreenShot(driver); 
 		// open the browser 
@@ -66,29 +65,24 @@ public class AdminLogoutTest {
 		Thread.sleep(1000);
 		driver.quit();
 	}
+	//verify admin is able to logout
 	@Test
-	public void updateprofileTest(ITestContext context) {
-		// Set up password from test context
-		
-	    //String password = (String)context.getAttribute("pswd");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        loginPOM.sendUserName("admin");
+	public void adminlogoutTest() {
+		loginPOM.sendUserName("admin");
 		loginPOM.sendPassword("admin@123");
 		loginPOM.clickLoginBtn();
-		assertTrue(driver.getPageSource().contains("Dashboard"));
-        org.openqa.selenium.interactions.Actions actions = new org.openqa.selenium.interactions.Actions(driver);
+		AssertJUnit.assertTrue(driver.getPageSource().contains("Dashboard"));
+	    Actions actions = new Actions(driver);
 		WebElement menuOption = updateprflPOM.adminHover();
 		actions.moveToElement(menuOption).perform();
 		assertTrue(driver.getPageSource().contains("admin"));
 		assertTrue(driver.getPageSource().contains("Edit My Profile"));
 		assertTrue(driver.getPageSource().contains("Log Out"));
+		//click on logout button
 		adminlogoutPOM.clicklogoutBtn();
 		assertTrue(driver.getPageSource().contains("Log In"));
 		assertTrue(driver.getPageSource().contains("Register"));
-		
-        screenShot.captureScreenShot("test admin logout test case");
-        //context.setAttribute("pswd", password);
-        
-       
+		screenShot.captureScreenShot("test admin logout test case");
+      
 	}
 }

@@ -11,6 +11,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.AssertJUnit;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -24,14 +26,15 @@ import com.training.utility.DriverNames;
 import com.training.utility.RandomInteger;
 import com.training.utility.Randomstring;
 
-public class UpdateProfileTest {
+public class UpdateProfileTest  {
 
-	private WebDriver driver;
-	private String baseUrl;
-	private LoginPOM loginPOM;
-	private UpdateProfilePOM updateprflPOM;
-	private static Properties properties;
-	private ScreenShot screenShot;
+	public WebDriver driver;
+	public String baseUrl;
+	public LoginPOM loginPOM;
+	public UpdateProfilePOM updateprflPOM;
+	public static Properties properties;
+	public ScreenShot screenShot;
+	
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws IOException {
@@ -56,19 +59,20 @@ public class UpdateProfileTest {
 		Thread.sleep(1000);
 		driver.quit();
 	}
+	//verify admin is able to update profile details
 	@Test
 	public void updateprofileTest() {
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        loginPOM.sendUserName("admin");
+		loginPOM.sendUserName("admin");
 		loginPOM.sendPassword("admin@123");
 		loginPOM.clickLoginBtn();
-
-		org.openqa.selenium.interactions.Actions actions = new org.openqa.selenium.interactions.Actions(driver);
+		AssertJUnit.assertTrue(driver.getPageSource().contains("Dashboard"));
+         Actions actions = new Actions(driver);
 		WebElement menuOption = updateprflPOM.adminHover();
 		actions.moveToElement(menuOption).perform();
 		assertTrue(driver.getPageSource().contains("admin"));
 		assertTrue(driver.getPageSource().contains("Edit My Profile"));
 		assertTrue(driver.getPageSource().contains("Log Out"));
+		//click on update profile button
         updateprflPOM.clickupdateprflBtn();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();", updateprflPOM.lastname);
@@ -83,6 +87,6 @@ public class UpdateProfileTest {
         updateprflPOM.clicksubmtBtn();
         //verify upload successfull message on the screen
 		assertTrue(driver.getPageSource().contains("Profile updated."));
-        screenShot.captureScreenShot("Second");
+        screenShot.captureScreenShot("update profile test case");
 	}
 }

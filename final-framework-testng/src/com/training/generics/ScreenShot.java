@@ -20,14 +20,14 @@ import org.openqa.selenium.WebDriverException;
  */
 public class ScreenShot {
 
-	private WebDriver driver; 
+	private static WebDriver driver; 
 	
 	// the driver information will be given by selenium test case 
 	public ScreenShot(WebDriver driver){
 		this.driver = driver; 
 	}
 	
-	public void captureScreenShot(){
+	public static void captureScreenShot(){
 		
 		// to be changed 
 		String path = "C:\\Users\\RajatThakur\\Desktop\\screenshots\\";
@@ -64,7 +64,7 @@ public class ScreenShot {
 	}
 	
 
-	public void captureScreenShot(String fileName){
+	public  void captureScreenShot(String fileName){
 		
 		String path =  "C:\\Users\\RajatThakur\\Desktop\\screenshots\\";
 	

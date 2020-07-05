@@ -6,7 +6,7 @@ public class RandomInteger {
 	public static int random()
 	{
 	 Random ran = new Random();
-	 int x = ran.nextInt(6) + 5;
+	 int x = ran.nextInt(6151) + 11;
 	 return x;
 	 
 }

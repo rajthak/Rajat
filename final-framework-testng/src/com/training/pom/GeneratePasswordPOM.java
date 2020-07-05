@@ -8,54 +8,39 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class GeneratePasswordPOM {
-	private WebDriver driver; 
+	public WebDriver driver; 
 	
 	public GeneratePasswordPOM(WebDriver driver) {
 		this.driver = driver; 
 		PageFactory.initElements(driver, this);
 	}
-	
-	/*@FindBy(xpath="/html/body/div[1]/div[2]/div[1]/div/ul[2]/li/a/img")
-	private WebElement admin;
-	public WebElement adminHover() {
-		return admin;
-	}*/
 
-	/*@FindBy(linkText="Edit My Profile")
-	private WebElement updateprflbtn;
-	public void clickupdateprflBtn() {
-		this.updateprflbtn.click(); 
-	}*/
-	
-	
-	@FindBy(xpath="/html/body/div[1]/div[2]/div[2]/div[1]/div[3]/form/table[5]/tbody/tr[1]/td/button")
+	@FindBy(xpath="//button[@class='button wp-generate-pw hide-if-no-js']")
 	public WebElement generatepwd;
 	public void clickgeneratepwd() {
 		this.generatepwd.click();
 	
 	}
-	@FindBy(xpath="/html/body/div[1]/div[2]/div[2]/div[1]/div[3]/form/table[5]/tbody/tr[1]/td/div/span/input[2]")
+	
+	@FindBy(xpath="//input[@id='pass1-text']")
 	public WebElement cleargeneratepwd;
 	public void cleargeneratepwd() {
 		this.cleargeneratepwd.clear();
-		
-	}
+		}
 	
-	@FindBy(xpath="/html/body/div[1]/div[2]/div[2]/div[1]/div[3]/form/table[5]/tbody/tr[3]/td/label/input")
+	
+	@FindBy(xpath="//input[@class='pw-checkbox']")
 	public WebElement pwdcnfrmcheckbox;
 	public void clickpwdcnfrmbox() {
 		this.pwdcnfrmcheckbox.click();
 	}
-	@FindBy(xpath="/html/body/div[1]/div[2]/div[2]/div[1]/div[3]/form/table[5]/tbody/tr[1]/td/div/span/input[2]")
+	
+	
+	@FindBy(xpath="//input[@id='pass1-text']")
 	public WebElement newpasswrd;
 	public void sendNewpwd(String newpwd) {
 		
 		this.newpasswrd.sendKeys(newpwd); 
 	}
-	
-	
-	
-	
-	
 	
 }

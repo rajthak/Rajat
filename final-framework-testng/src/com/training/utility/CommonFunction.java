@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -84,6 +85,30 @@ public class CommonFunction {
 	}
 	return bool;
 }
+	public static boolean searchcategoryfromlist(WebDriver driver, String searchname)
+	{
+		boolean bool=false;
+		WebElement dropdown = driver.findElement(By.xpath("//div[@id='category-all'/ul']"));
+		
+	
+	//WebElement dropdown = driver.findElement(By.id("category-all"));
+	//dropdown.click(); 
+	List<WebElement> options = dropdown.findElements(By.tagName("li"));
+	for (WebElement option : options)
+	{
+	    if (option.getText().equals(searchname))
+	    {
+	    	//JavascriptExecutor js = (JavascriptExecutor) driver;
+			
+	    	option.click();
+	        bool=true;// click the desired option
+	        break;
+	    }
+	}
+	return bool;
+}
+	
+	
 }
 
 

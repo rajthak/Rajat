@@ -6,11 +6,47 @@ package com.training.bean;
  * @see this class shall get the bean data 
  */
 public class DBBean {
-	private String url; 
-	private String driver; 
-	private String userName; 
-	private String password;
+	public String url; 
+	public String driver; 
+	public String userName; 
+	public String password;
+	public String name;
+	public String subject;
+	public String message;
+	public String email;
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public DBBean(){}
 	
 	public DBBean(String url, String driver, String userName, String password) {

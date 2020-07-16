@@ -1,7 +1,9 @@
-create table login(
-username varchar(50) not null,
-password varchar(50));
+create table test1(
+name varchar(50) not null,
+subject varchar(50),
+message varchar(50),
+email varchar(50));
+
+insert into test1 values("manzoor", "hello", "test", "manzoor@gmail.com); 
 
 
-insert into login values("admin", "admin@123"); 
-insert into login values("naveen", "testing@123"); 
